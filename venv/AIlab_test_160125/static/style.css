@@ -1,0 +1,25 @@
+/* Header Styling */ #header { display: flex; justify-content: space-between; align-items: center; background-color: #f8f9fa; padding: 10px; border-bottom: 1px solid #ccc; z-index: 1000; position: sticky; top: 0; height: 50px; } #resources-button { background-color: #007bff; color: white; padding: 8px 12px; border: none; border-radius: 5px; cursor: pointer; } #resources-button:hover { background-color: #0056b3; } #header-right { display: flex; gap: 15px; } .header-link { color: #007bff; text-decoration: none; font-weight: bold; } .header-link:hover { text-decoration: underline; }
+
+/* Resources Dropdown */ #resources-dropdown { position: absolute; top: 60px; left: 10px; width: 250px; background: #fff; border: 1px solid #ccc; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); overflow-y: auto; max-height: 300px; z-index: 1000; padding: 10px; display: none; } #resources-dropdown a { display: block; padding: 8px 10px; color: #007bff; text-decoration: none; } #resources-dropdown a:hover { background-color: #f1f1f1; } .dropdown-visible { display: block !important; }
+
+/* PDF Viewer */ #pdf-viewer { flex: 1; overflow: hidden; padding: 10px; border-right: 2px solid #ccc; background-color: #f9f9f9; } iframe#pdf-frame { width: 100%; height: 90%; border: none; }
+
+/* Chat Panel */ #chat-panel { flex: 0 0 30%; min-width: 200px; max-width: 40%; display: flex; flex-direction: column; overflow: hidden; padding: 10px; height: calc(100vh - 50px); background: #fff; border-left: 1px solid #ccc; } #chat-container { overflow-y: auto; flex: 1; border: 1px solid #ccc; padding: 10px; margin-bottom: 5px; background-color: #f9f9f9; border-radius: 5px; height: 35vh; } #chat-input { width: calc(100% - 60px); padding: 8px; margin-top: 5px; margin-bottom: 5px; border-radius: 5px; border: 1px solid #ccc; } #send-button { width: 60px; margin-left: 5px; padding: 8px; background-color: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer; } #send-button:hover { background-color: #218838; }
+
+/* Coin Balance Section */ #coin-balance { display: flex; gap: 10px; margin-top: 5px; margin-bottom: 5px; text-align: center; justify-content: center; align-items: center; height: 80px; } #coin-balance div { border: 2px solid #aaa; border-radius: 10px; text-align: center; cursor: pointer; margin: 5px; padding: 8px; display: flex; flex-direction: column; align-items: center; width: 70px; transition: all 0.2s ease-in-out; } .coin-icon { width: 25px; height: 25px; margin-bottom: 3px; } .coin-selected { border-color: #28a745 !important; background-color: #e6ffe6; box-shadow: 0 0 5px rgba(40, 167, 69, 0.5); transition: all 0.2s ease-in-out; } #coin-balance it { font-size: 12px; font-weight: bold; }
+
+/* Main Container */ #main-container { display: flex; flex-direction: row; height: calc(100vh - 50px); overflow: hidden; }
+
+/* Chat Messages */ .message-client { background-color: #dcf8c6; color: #000; border-radius: 10px; padding: 8px 12px; margin: 10px 0; max-width: 70%; word-wrap: break-word; text-align: right; float: right; clear: both; } .message-server { background-color: #f1f0f0; color: #000; border-radius: 10px; padding: 8px 12px; margin: 10px 0; max-width: 70%; word-wrap: break-word; text-align: left; float: left; clear: both; }
+
+/* Error and System Messages */ .message-error { background-color: #ffcccc; color: #a94442; border-radius: 10px; padding: 8px 12px; text-align: center; font-weight: bold; } .message-system { background-color: #fff3cd; color: #856404; border-radius: 10px; padding: 8px 12px; text-align: center; font-style: italic; }
+
+/* Resizer Styling */ .resizer-horizontal { width: 5px; background: #ccc; cursor: ew-resize; z-index: 1; } .resizer-horizontal:hover { background: #888; }
+
+/* Global Styling */ html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; }
+
+/* Adjustments for Chat Controls */ #chat-controls { display: flex; align-items: center; margin-bottom: 10px; } #chat-container { max-height: 50vh; } #coin-balance { margin-top: 0; margin-bottom: 0; }
+
+/* Panel Resizer */ #resizer-horizontal { width: 5px; background: #ccc; cursor: ew-resize; z-index: 1; } #resizer-horizontal:hover { background: #888; }
+
+/* Responsive Design */ @media (max-width: 768px) { #header { flex-direction: column; } #header-right { margin-top: 10px; } #main-container { flex-direction: column; } #pdf-viewer, #chat-panel { flex: 1; } }

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Application</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="{{ url_for('static', filename='socket.io.js') }}"></script>
+</head>
+
+<body>
+    <!-- Header Section -->
+    <header id="header">
+        <div id="header-left">
+            <button id="resources-button" onclick="toggleResources()">Resources</button>
+        </div>
+        <div id="header-right">
+            <a href="/auth/login" class="header-link">Login</a>
+            <a href="/auth/register" class="header-link">Register</a>
+        </div>
+    </header>
+
+    <!-- Resources Dropdown Menu -->
+    <div id="resources-dropdown" class="hidden">
+        <div class="dropdown-content">
+            <a href="#" onclick="openPDF('PythonIntroductionTextbook.pdf')">Python Introduction Textbook</a>
+            <a href="#" onclick="openPDF('01_PythonIntro.pdf')">01_PythonIntro</a>
+            <a href="#" onclick="openPDF('02_BranchingStringsInput.pdf')">02_BranchingStringsInput</a>
+            <a href="#" onclick="openPDF('03_Iteration.pdf')">03_Iteration</a>
+            <a href="#" onclick="openPDF('04_Functions.pdf')">04_Functions</a>
+            <a href="#" onclick="openPDF('05_ModulesFiles.pdf')">05_ModulesFiles</a>
+            <a href="#" onclick="openPDF('06_StructuredTypes.pdf')">06_StructuredTypes</a>
+            <a href="#" onclick="openPDF('07_Classes.pdf')">07_Classes</a>
+            <a href="#" onclick="openPDF('08_Recursion.pdf')">08_Recursion</a>
+            <a href="#" onclick="openPDF('09_ComplexitySearchSort.pdf')">09_ComplexitySearchSort</a>
+            <a href="#" onclick="openPDF('10_Numpy.pdf')">10_Numpy</a>
+            <a href="#" onclick="openPDF('11_PlottingExperimental.pdf')">11_PlottingExperimental</a>
+            <a href="#" onclick="openPDF('12_RandomWalks.pdf')">12_RandomWalks</a>
+            <a href="https://www.w3schools.com/python/" target="_blank">Python Reference - W3Schools</a>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div id="main-container">
+        <!-- PDF Viewer -->
+        <div id="pdf-viewer">
+            <h2>PDF Viewer</h2>
+            <iframe id="pdf-frame" src="" style="width: 100%; height: 90%; border: none;"></iframe>
+        </div>
+        
+        <!-- Resizer for PDF and Chat -->
+        <div class="resizer-horizontal" id="resizer-horizontal"></div>
+
+        <!-- Chat Panel -->
+        <div id="chat-panel">
+            <h2>ChatBot</h2>
+            <ul id="chat-container"></ul>
+            <div id="chat-controls">
+                <input type="text" id="chat-input" autocomplete="off" placeholder="Type your message...">
+                <button id="send-button" onclick="sendMessage()">Send</button>
+            </div>
+
+            <!-- Coin Balance Section -->
+            <div id="coin-balance">
+                <h2>Your Coins:</h2>
+                <div id="copper-coin" onclick="selectCoin('copper')"> 
+                    <img class="coin-icon" src="/static/coins/copper.png"> 
+                    <it>{{ coin_balance['copper'] }}</it> 
+                </div>
+                <div id="silver-coin" onclick="selectCoin('silver')"> 
+                    <img class="coin-icon" src="/static/coins/silver.png"> 
+                    <it>{{ coin_balance['silver'] }}</it> 
+                </div>
+                <div id="gold-coin" onclick="selectCoin('gold')">   
+                    <img class="coin-icon" src="/static/coins/gold.png"> 
+                    <it>{{ coin_balance['gold'] }}</it> 
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
+    <script>
+        // Toggle Resources Dropdown
+        function toggleResources() {
+            const dropdown = document.getElementById('resources-dropdown');
+            dropdown.classList.toggle('hidden');
+        }
+
+        // PDF Viewer Functionality
+        function openPDF(filename) {
+            const pdfFrame = document.getElementById('pdf-frame');
+            if (pdfFrame) {
+                pdfFrame.src = `/static/resources/${filename}`;
+            } else {
+                console.error('PDF Viewer iframe not found!');
+            }
+        }
+
+        // Coin Selection
+        let selected_coin = "";
+
+        function selectCoin(cointype) {
+            document.querySelectorAll('#coin-balance div').forEach(coin => {
+                coin.classList.remove('coin-selected');
+            });
+            document.getElementById(`${cointype}-coin`).classList.add('coin-selected');
+            selected_coin = cointype;
+        }
+
+        // Resizable Panels
+        function setupResizablePanels() {
+            const resizer = document.getElementById('resizer-horizontal');
+            const pdfViewer = document.getElementById('pdf-viewer');
+            const chatPanel = document.getElementById('chat-panel');
+            let isResizing = false;
+
+            resizer.addEventListener('mousedown', () => {
+                isResizing = true;
+                document.body.style.cursor = 'ew-resize';
+            });
+
+            document.addEventListener('mousemove', (e) => {
+                if (!isResizing) return;
+                const totalWidth = window.innerWidth;
+                const newPDFWidth = (e.clientX / totalWidth) * 100;
+                if (newPDFWidth > 30 && newPDFWidth < 70) {
+                    pdfViewer.style.flex = `0 0 ${newPDFWidth}%`;
+                    chatPanel.style.flex = `0 0 ${100 - newPDFWidth}%`;
+                }
+            });
+
+            document.addEventListener('mouseup', () => {
+                isResizing = false;
+                document.body.style.cursor = 'default';
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', setupResizablePanels);
+    </script>
+</body>
+</html>
