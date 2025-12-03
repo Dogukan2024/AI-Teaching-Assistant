@@ -2,7 +2,7 @@ from openai import OpenAI
 import logging
 
 # Replace with your OpenAI API key
-API_KEY = "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"
+API_KEY = "sk-secretkey"
 
 # Configure logger
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(message)s")
