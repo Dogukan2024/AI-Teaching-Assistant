@@ -1,5 +1,8 @@
 # AI Lab – Flask + Socket.IO Streaming Chat with Token-Based Tiers
 
+[![Project Presentation](presentation/slide1.png)](presentation/presentation.pdf)
+
+
 This project is a **Flask web application** that provides a real-time AI chat interface powered by **Socket.IO**, **SQLite**, and **OpenAI's streaming API**.  
 Each user message consumes a coin from one of three tiers:
 
