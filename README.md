@@ -1,4 +1,4 @@
-# AI Lab – Flask + Socket.IO Streaming Chat with Token-Based Tiers
+# AI Teaching Assistant (In Development)
 
 
 
